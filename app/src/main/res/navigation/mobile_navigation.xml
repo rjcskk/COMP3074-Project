@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_newPlace">
+
+    <fragment
+        android:id="@+id/nav_newPlace"
+        android:name="com.example.myrestaurantdiary.ui.newPlace.NewPlaceFragment"
+        android:label="@string/menu_newPlace"
+        tools:layout="@layout/fragment_newplace" />
+
+    <fragment
+        android:id="@+id/nav_restaurantList"
+        android:name="com.example.myrestaurantdiary.ui.about.AboutFragment"
+        android:label="@string/menu_restaurantList"
+        tools:layout="@layout/fragment_restaurantlist" />
+
+    <fragment
+        android:id="@+id/nav_map"
+        android:name="com.example.myrestaurantdiary.ui.about.AboutFragment"
+        android:label="@string/menu_maps"
+        tools:layout="@layout/fragment_maps" />
+    <fragment
+        android:id="@+id/nav_about"
+        android:name="com.example.myrestaurantdiary.ui.about.AboutFragment"
+        android:label="@string/menu_About"
+        tools:layout="@layout/fragment_maps" />
+</navigation>
