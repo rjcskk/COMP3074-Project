@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_restaurantList"
-        android:name="com.example.myrestaurantdiary.ui.about.AboutFragment"
+        android:name="com.example.myrestaurantdiary.ui.restaurantList.RestaurantListFragment"
         android:label="@string/menu_restaurantList"
         tools:layout="@layout/fragment_restaurantlist" />
 
     <fragment
         android:id="@+id/nav_map"
-        android:name="com.example.myrestaurantdiary.ui.about.AboutFragment"
+        android:name="com.example.myrestaurantdiary.ui.maps.MapsFragment"
         android:label="@string/menu_maps"
         tools:layout="@layout/fragment_maps" />
     <fragment
