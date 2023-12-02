@@ -17,14 +17,13 @@
         android:textAlignment="center"
         android:textSize="20sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
         android:text="Name"
-        android:textSize="18sp" />
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/text_name_input"
@@ -34,13 +33,13 @@
         android:inputType="text"
         android:textSize="18sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_address"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="Address" />
+        android:text="Address"
+        android:textSize="20dp"/>
 
     <EditText
         android:id="@+id/text_address_input"
@@ -49,13 +48,13 @@
         android:ems="10"
         android:inputType="textPostalAddress" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_phone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="Phone Number" />
+        android:text="Phone Number"
+        android:textSize="20dp"/>
 
     <EditText
         android:id="@+id/text_phone_input"
@@ -64,13 +63,13 @@
         android:ems="10"
         android:inputType="phone" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="Description" />
+        android:text="Description"
+        android:textSize="20dp"/>
 
     <EditText
         android:id="@+id/text_description_input"
@@ -79,13 +78,13 @@
         android:ems="10"
         android:inputType="text" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_tag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="Tags" />
+        android:text="Tags"
+        android:textSize="20dp" />
 
     <EditText
         android:id="@+id/text_tag_input"
@@ -94,12 +93,12 @@
         android:ems="10"
         android:inputType="textMultiLine" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_rating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
+        android:textSize="20dp"
         android:text="Rating" />
 
     <RatingBar
@@ -107,6 +106,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center" />
+
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="ADD"
+        android:layout_gravity="center"/>
 
     <Button
         android:id="@+id/shareButton"

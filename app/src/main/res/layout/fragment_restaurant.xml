@@ -17,15 +17,16 @@
         android:textAlignment="center"
         android:textSize="20sp" />
 
-    <EditText
+    <TextView
         android:id="@+id/text_restaurant_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="text"
-        android:text="(Restaurant Name)" />
+        android:textSize="30dp"
+        android:textAlignment="center"/>
 
     <ListView
+        android:id="@+id/info"
         android:layout_width="match_parent"
         android:layout_height="500dp" />
     <Button

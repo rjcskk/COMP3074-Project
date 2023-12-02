@@ -15,7 +15,36 @@
         android:id="@+id/nav_restaurantList"
         android:name="com.example.myrestaurantdiary.ui.restaurantList.RestaurantListFragment"
         android:label="@string/menu_restaurantList"
-        tools:layout="@layout/fragment_restaurantlist" />
+        tools:layout="@layout/fragment_restaurantlist" >
+
+        <action
+            android:id="@+id/action_restaurantListFragment_to_restaurantFragment"
+            app:destination="@id/nav_restaurantFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_restaurantFragment"
+        android:name="com.example.myrestaurantdiary.ui.restaurant.RestaurantFragment"
+        android:label="RESTAURANT"
+        tools:layout="@layout/fragment_restaurant" >
+
+        <argument
+            android:name="Name"
+            app:argType="string" />
+        <argument
+            android:name="Address"
+            app:argType="string" />
+        <argument
+            android:name="Phone Number"
+            app:argType="string" />
+        <argument
+            android:name="Description"
+            app:argType="string" />
+        <argument
+            android:name="Tags"
+            app:argType="string" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/nav_map"

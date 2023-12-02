@@ -47,5 +47,7 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
     implementation("com.google.maps.android:android-maps-utils:2.2.5")
+//    implementation("androidx.room:room-runtime:2.2.6")
+//    kapt("androidx.room:room-compiler:2.2.6")
 
 }
