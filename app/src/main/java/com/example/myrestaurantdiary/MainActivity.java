@@ -3,9 +3,7 @@ package com.example.myrestaurantdiary;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import com.example.myrestaurantdiary.databinding.ActivityMainBinding;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -38,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
 
-        DBHandler dbHandler = new DBHandler(this);
-        dbHandler.insertInitialData();
     }
 
     @Override

@@ -40,30 +40,6 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertInitialData() {
-        SQLiteDatabase db = this.getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put(KEY_NAME, "Restaurant 1");
-        values.put(KEY_ADDRESS, "Address 1");
-        values.put(KEY_PHONE_NUMBER, "1234567890");
-        values.put(KEY_DESCRIPTION, "Description 1");
-        values.put(KEY_TAGS, "Tag1, Tag2");
-
-        db.insert(TABLE_RESTAURANTS, null, values);
-
-        values.clear();
-        values.put(KEY_NAME, "Restaurant 2");
-        values.put(KEY_ADDRESS, "Address 2");
-        values.put(KEY_PHONE_NUMBER, "0987654321");
-        values.put(KEY_DESCRIPTION, "Description 2");
-        values.put(KEY_TAGS, "Tag3, Tag4");
-
-        db.insert(TABLE_RESTAURANTS, null, values);
-
-        db.close();
-    }
-
     public List<Restaurant> getAllRestaurant() {
         List<Restaurant> restaurantList = new ArrayList<>();
         String selectQuery = "SELECT  * FROM " + TABLE_RESTAURANTS;
