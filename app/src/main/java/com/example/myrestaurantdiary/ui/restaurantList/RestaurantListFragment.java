@@ -12,16 +12,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
-
 import com.example.myrestaurantdiary.DBHandler;
+import com.example.myrestaurantdiary.MainActivity;
 import com.example.myrestaurantdiary.R;
 import com.example.myrestaurantdiary.Restaurant;
 import com.example.myrestaurantdiary.databinding.FragmentRestaurantlistBinding;
-import com.example.myrestaurantdiary.ui.newPlace.NewPlaceFragment;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +37,7 @@ public class RestaurantListFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         RestaurantListViewModel restaurantListViewModel =
-            new ViewModelProvider(this).get(RestaurantListViewModel.class);
+                new ViewModelProvider(this).get(RestaurantListViewModel.class);
 
         binding = FragmentRestaurantlistBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
@@ -89,6 +88,12 @@ public class RestaurantListFragment extends Fragment {
                 searchRestaurants(searchTerm);
             }
         });
+
+        MainActivity mainActivity = (MainActivity) getActivity();
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                getActivity(), mainActivity.drawer, mainActivity.binding.appBarMain.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mainActivity.drawer.addDrawerListener(toggle);
+        toggle.syncState();
 
         return root;
     }

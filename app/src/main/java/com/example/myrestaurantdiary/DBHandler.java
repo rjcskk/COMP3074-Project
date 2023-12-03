@@ -6,101 +6,73 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final int VERSION = 1;
-    private static final String DB_NAME = "RestaurantDB";
-    private static final String RESTAURANTS_TABLE = "restaurant";
-    private static final String ID = "id";
-    private static final String NAME = "name";
-    private static final String ADDRESS = "address";
-    private static final String PHONE_NUMBER = "phoneNumber";
-    private static final String DESCRIPTION = "description";
-    private static final String TAGS = "tags";
+    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "restaurantManager";
+    private static final String TABLE_RESTAURANTS = "restaurants";
+    private static final String KEY_ID = "id";
+    private static final String KEY_NAME = "name";
+    private static final String KEY_ADDRESS = "address";
+    private static final String KEY_PHONE_NUMBER = "phoneNumber";
+    private static final String KEY_DESCRIPTION = "description";
+    private static final String KEY_TAGS = "tags";
 
-    public DBHandler(@Nullable Context context) {
-        super(context, NAME, null, VERSION);
+    public DBHandler(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_RESTAURANTS_TABLE =
-                "CREATE TABLE " + RESTAURANTS_TABLE
-                        + "(" + ID + " INTEGER PRIMARY KEY autoincrement,"
-                        + NAME + " TEXT,"
-                        + ADDRESS + " TEXT,"
-                        + PHONE_NUMBER + " TEXT,"
-                        + DESCRIPTION + " TEXT, "
-                        + TAGS + " TEXT)";
+        String CREATE_RESTAURANTS_TABLE = "CREATE TABLE " + TABLE_RESTAURANTS + "("
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+                + KEY_ADDRESS + " TEXT," + KEY_PHONE_NUMBER + " TEXT,"
+                + KEY_DESCRIPTION + " TEXT," + KEY_TAGS + " TEXT" + ")";
         db.execSQL(CREATE_RESTAURANTS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        String sql = "DROP TABLE " + RESTAURANTS_TABLE;
-        db.execSQL(sql);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESTAURANTS);
         onCreate(db);
     }
 
-    public void addRestaurant(Restaurant restaurant){
-        SQLiteDatabase db = getWritableDatabase();
+    public void insertInitialData() {
+        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(NAME, restaurant.getName());
-        values.put(ADDRESS, restaurant.getAddress());
-        values.put(PHONE_NUMBER, restaurant.getPhoneNumber());
-        values.put(DESCRIPTION, restaurant.getDescription());
-        values.put(TAGS, restaurant.getTags());
+        values.put(KEY_NAME, "Restaurant 1");
+        values.put(KEY_ADDRESS, "Address 1");
+        values.put(KEY_PHONE_NUMBER, "1234567890");
+        values.put(KEY_DESCRIPTION, "Description 1");
+        values.put(KEY_TAGS, "Tag1, Tag2");
 
-        db.insert(RESTAURANTS_TABLE, null, values);
+        db.insert(TABLE_RESTAURANTS, null, values);
+
+        values.clear();
+        values.put(KEY_NAME, "Restaurant 2");
+        values.put(KEY_ADDRESS, "Address 2");
+        values.put(KEY_PHONE_NUMBER, "0987654321");
+        values.put(KEY_DESCRIPTION, "Description 2");
+        values.put(KEY_TAGS, "Tag3, Tag4");
+
+        db.insert(TABLE_RESTAURANTS, null, values);
+
         db.close();
     }
 
-    public Restaurant getRestaurant(int id){
-        SQLiteDatabase db = getReadableDatabase();
+    public List<Restaurant> getAllRestaurant() {
+        List<Restaurant> restaurantList = new ArrayList<>();
+        String selectQuery = "SELECT  * FROM " + TABLE_RESTAURANTS;
 
-        Cursor cursor = db.query(
-                RESTAURANTS_TABLE,
-                new String[]{ID, NAME, ADDRESS, PHONE_NUMBER, DESCRIPTION, TAGS},
-                ID + "=?",
-                new String[]{String.valueOf(id)},
-                null, null, null, null
-        );
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
 
-        Restaurant restaurant;
-
-        if(cursor != null){
-            cursor.moveToFirst();
-            restaurant = new Restaurant(
-                    Integer.parseInt(cursor.getString(0)),
-                    cursor.getString(1),
-                    cursor.getString(2),
-                    cursor.getString(3),
-                    cursor.getString(4),
-                    cursor.getString(5)
-            );
-
-            return restaurant;
-        } else{
-            return null;
-        }
-    }
-
-    public List<Restaurant> getAllRestaurant(){
-        SQLiteDatabase db = getReadableDatabase();
-        List<Restaurant> restaurants = new ArrayList<>();
-
-        String query = "SELECT * FROM " + RESTAURANTS_TABLE;
-
-        Cursor cursor = db.rawQuery(query, null);
-
-        if(cursor.moveToFirst()){
-            do{
+        if (cursor.moveToFirst()) {
+            do {
                 Restaurant restaurant = new Restaurant();
                 restaurant.setId(Integer.parseInt(cursor.getString(0)));
                 restaurant.setName(cursor.getString(1));
@@ -109,45 +81,39 @@ public class DBHandler extends SQLiteOpenHelper {
                 restaurant.setDescription(cursor.getString(4));
                 restaurant.setTags(cursor.getString(5));
 
-                restaurants.add(restaurant);
-            }
-            while (cursor.moveToNext());
+                restaurantList.add(restaurant);
+            } while (cursor.moveToNext());
         }
-        return restaurants;
+
+        return restaurantList;
     }
 
-    public int updateRestaurant(Restaurant restaurant){
-        SQLiteDatabase db = getWritableDatabase();
+    public Restaurant getRestaurant(int id) {
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_RESTAURANTS, new String[] { KEY_ID,
+                        KEY_NAME, KEY_ADDRESS, KEY_PHONE_NUMBER, KEY_DESCRIPTION, KEY_TAGS }, KEY_ID + "=?",
+                new String[] { String.valueOf(id) }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Restaurant restaurant = new Restaurant(Integer.parseInt(cursor.getString(0)),
+                cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5));
+
+        return restaurant;
+    }
+
+    public void addRestaurant(Restaurant restaurant) {
+        SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(NAME, restaurant.getName());
-        values.put(ADDRESS, restaurant.getAddress());
-        values.put(PHONE_NUMBER, restaurant.getPhoneNumber());
-        values.put(DESCRIPTION, restaurant.getDescription());
-        values.put(TAGS, restaurant.getTags());
+        values.put(KEY_NAME, restaurant.getName());
+        values.put(KEY_ADDRESS, restaurant.getAddress());
+        values.put(KEY_PHONE_NUMBER, restaurant.getPhoneNumber());
+        values.put(KEY_DESCRIPTION, restaurant.getDescription());
+        values.put(KEY_TAGS, restaurant.getTags());
 
-        return db.update(
-                RESTAURANTS_TABLE,
-                values,
-                ID + "= ?",
-                new String[]{String.valueOf(restaurant.getId())}
-        );
-    }
-
-    public void deleteRestaurant(Restaurant restaurant){
-        SQLiteDatabase db = getReadableDatabase();
-        db.delete(
-                RESTAURANTS_TABLE,
-                ID + "= ?",
-                new String[]{String.valueOf(restaurant.getId())}
-        );
+        db.insert(TABLE_RESTAURANTS, null, values);
         db.close();
-    }
-
-    public int getRestaurantCount(){
-        SQLiteDatabase db = getReadableDatabase();
-        String query = "SELECT * FROM " + RESTAURANTS_TABLE;
-        Cursor cursor = db.rawQuery(query, null);
-        return cursor.getCount();
     }
 }

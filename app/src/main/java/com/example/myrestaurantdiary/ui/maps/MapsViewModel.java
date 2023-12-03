@@ -1,4 +1,4 @@
-package com.example.myrestaurantdiary.ui.about;
+package com.example.myrestaurantdiary.ui.maps;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
