@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -23,10 +24,11 @@ public class RestaurantFragment extends Fragment {
     private FragmentRestaurantBinding binding;
     private ListView infoList;
     private List<String> additionalInfoList;
+    private RestaurantViewModel restaurantViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        RestaurantViewModel restaurantViewModel =
+        restaurantViewModel =
                 new ViewModelProvider(this).get(RestaurantViewModel.class);
 
         binding = FragmentRestaurantBinding.inflate(inflater, container, false);
@@ -50,6 +52,14 @@ public class RestaurantFragment extends Fragment {
             infoList = root.findViewById(R.id.info);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, additionalInfoList);
             infoList.setAdapter(adapter);
+
+            RatingBar ratingBar = root.findViewById(R.id.ratingBar);
+            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+                @Override
+                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+                    restaurantViewModel.setRating(rating);
+                }
+            });
         }
 
         return root;

@@ -20,6 +20,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_PHONE_NUMBER = "phoneNumber";
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_TAGS = "tags";
+    private static final String KEY_RATING = "rating";
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -91,5 +92,15 @@ public class DBHandler extends SQLiteOpenHelper {
 
         db.insert(TABLE_RESTAURANTS, null, values);
         db.close();
+    }
+
+    public void updateRating(int id, float rating) {
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(KEY_RATING, rating);
+
+        db.update(TABLE_RESTAURANTS, values, KEY_ID + " = ?",
+                new String[]{String.valueOf(id)});
     }
 }
