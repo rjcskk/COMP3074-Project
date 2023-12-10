@@ -43,6 +43,9 @@
         <argument
             android:name="Tags"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_restaurantFragment_to_nav_restaurantList"
+            app:destination="@id/nav_restaurantList" />
 
     </fragment>
 
