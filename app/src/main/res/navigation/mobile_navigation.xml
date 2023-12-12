@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_about">
+    app:startDestination="@id/nav_restaurantList">
 
     <fragment
         android:id="@+id/nav_newPlace"
@@ -16,9 +16,8 @@
         android:name="com.example.myrestaurantdiary.ui.restaurantList.RestaurantListFragment"
         android:label="@string/menu_restaurantList"
         tools:layout="@layout/fragment_restaurantlist" >
-
         <action
-            android:id="@+id/action_restaurantListFragment_to_restaurantFragment"
+            android:id="@+id/action_nav_restaurantList_to_nav_restaurantFragment"
             app:destination="@id/nav_restaurantFragment" />
     </fragment>
 

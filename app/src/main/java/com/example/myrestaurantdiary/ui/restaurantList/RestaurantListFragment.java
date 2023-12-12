@@ -1,6 +1,5 @@
 package com.example.myrestaurantdiary.ui.restaurantList;
 
-import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -77,7 +76,7 @@ public class RestaurantListFragment extends Fragment {
                 bundle.putString("Tags", restaurant.getTags());
 
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_restaurantListFragment_to_restaurantFragment, bundle);
+                        .navigate(R.id.action_nav_restaurantList_to_nav_restaurantFragment, bundle);
             }
         });
 
@@ -88,12 +87,6 @@ public class RestaurantListFragment extends Fragment {
                 searchRestaurants(searchTerm);
             }
         });
-
-        MainActivity mainActivity = (MainActivity) getActivity();
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                getActivity(), mainActivity.drawer, mainActivity.binding.appBarMain.toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mainActivity.drawer.addDrawerListener(toggle);
-        toggle.syncState();
 
         return root;
     }
@@ -137,7 +130,7 @@ public class RestaurantListFragment extends Fragment {
                 bundle.putString("Tags", selectedRestaurant.getTags());
 
                 Navigation.findNavController(view)
-                        .navigate(R.id.action_restaurantListFragment_to_restaurantFragment, bundle);
+                        .navigate(R.id.action_nav_restaurantList_to_nav_restaurantFragment, bundle);
             }
         });
     }
