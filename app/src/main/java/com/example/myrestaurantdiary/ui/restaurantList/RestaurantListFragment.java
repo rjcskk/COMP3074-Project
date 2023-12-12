@@ -128,6 +128,7 @@ public class RestaurantListFragment extends Fragment {
                 bundle.putString("Phone Number", selectedRestaurant.getPhoneNumber());
                 bundle.putString("Description", selectedRestaurant.getDescription());
                 bundle.putString("Tags", selectedRestaurant.getTags());
+                bundle.putFloat("Rating", restaurant.getRating());
 
                 Navigation.findNavController(view)
                         .navigate(R.id.action_nav_restaurantList_to_nav_restaurantFragment, bundle);

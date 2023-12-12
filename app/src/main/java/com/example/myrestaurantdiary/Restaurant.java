@@ -5,15 +5,17 @@ public class Restaurant {
     int id;
     String name, address, phoneNumber, description;
     String tags;
+    float rating;
 
     public Restaurant(int id, String name, String address, String phoneNumber,
-                      String description, String tags) {
+                      String description, String tags, float rating) {
         this.id = id;
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.tags = tags;
+        this.rating = rating;
     }
 
     public Restaurant(){
@@ -21,12 +23,13 @@ public class Restaurant {
     }
 
     public Restaurant(String name, String address, String phoneNumber,
-                      String description, String tags) {
+                      String description, String tags, float rating) {
         this.name = name;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.description = description;
         this.tags = tags;
+        this.rating = rating;
     }
 
     public int getId() {
@@ -75,5 +78,13 @@ public class Restaurant {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public float getRating() {
+        return rating;
+    }
+
+    public void setRating(float rating) {
+        this.rating = rating;
     }
 }

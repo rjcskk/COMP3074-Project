@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -28,6 +29,7 @@ public class NewPlaceFragment extends Fragment {
     DBHandler dbHandler;
     EditText et_name, et_address, et_phone, et_desc, et_tags;
     Button add;
+    RatingBar ratingBar;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,9 +40,6 @@ public class NewPlaceFragment extends Fragment {
         binding = FragmentNewplaceBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNewplace;
-        newPlaceViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         dbHandler = new DBHandler(getContext());
 
         et_name = binding.textNameInput;
@@ -48,6 +47,7 @@ public class NewPlaceFragment extends Fragment {
         et_phone = binding.textPhoneInput;
         et_desc = binding.textDescriptionInput;
         et_tags = binding.textTagInput;
+        ratingBar = binding.simpleRatingBar;
 
         add = binding.addButton;
 
@@ -59,16 +59,25 @@ public class NewPlaceFragment extends Fragment {
                 String phone = et_phone.getText().toString();
                 String desc = et_desc.getText().toString();
                 String tags = et_tags.getText().toString();
+                float rating = ratingBar.getRating();
 
                 if(name.trim().length() > 0 && address.trim().length() > 0
                         && phone.trim().length() > 0 && desc.trim().length() > 0
                         && tags.trim().length() > 0 ){
-                    Restaurant restaurant = new Restaurant(name, address, phone, desc, tags);
+                    Restaurant restaurant = new Restaurant(name, address, phone, desc, tags, rating);
                     dbHandler.addRestaurant(restaurant);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage("New restaurant added successfully")
                             .setPositiveButton("OK", null)
                             .show();
+
+                    // Clear all the fields
+                    et_name.setText("");
+                    et_address.setText("");
+                    et_phone.setText("");
+                    et_desc.setText("");
+                    et_tags.setText("");
+                    ratingBar.setRating(0);
                 } else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage("Please fill all the fields")
@@ -77,7 +86,6 @@ public class NewPlaceFragment extends Fragment {
                 }
             }
         });
-
         return root;
     }
 
