@@ -3,6 +3,7 @@ package com.example.myrestaurantdiary.ui.restaurant;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +42,11 @@ public class RestaurantFragment extends Fragment {
         Bundle args = getArguments();
         if (args != null) {
             String name = args.getString("Name");
-            float rating = args.getFloat("Rating");
+            float rating = args.getFloat("Rating", 0.0f);
+            Log.d("RestaurantFragment", "Received restaurant with rating: " + rating);
+            RatingBar ratingBar = root.findViewById(R.id.ratingBar);
+            ratingBar.setRating(rating);
+
             restaurantAddress = args.getString("Address");
             additionalInfoList = new ArrayList<>();
             additionalInfoList.add("Address:\n" + restaurantAddress);
@@ -49,21 +54,10 @@ public class RestaurantFragment extends Fragment {
             additionalInfoList.add("Description:\n" + args.getString("Description"));
             additionalInfoList.add("Tags:\n" + args.getString("Tags"));
 
-            TextView nameTextView = root.findViewById(R.id.text_restaurant_name);
-            nameTextView.setText(name);
-
             infoList = root.findViewById(R.id.info);
             ArrayAdapter<String> adapter = new ArrayAdapter<>(requireContext(), android.R.layout.simple_list_item_1, additionalInfoList);
             infoList.setAdapter(adapter);
 
-            RatingBar ratingBar = root.findViewById(R.id.ratingBar);
-            ratingBar.setRating(rating);
-            ratingBar.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
-                @Override
-                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
-                    restaurantViewModel.setRating(rating);
-                }
-            });
 
             Button directionButton = root.findViewById(R.id.btn_direction);
             directionButton.setOnClickListener(new View.OnClickListener() {

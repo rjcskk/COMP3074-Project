@@ -36,7 +36,7 @@
         android:layout_gravity="center"
         android:numStars="5"
         android:stepSize="1"
-        android:rating="3" />
+        android:isIndicator="true" />
     <Button
         android:id="@+id/btn_direction"
         android:layout_width="wrap_content"

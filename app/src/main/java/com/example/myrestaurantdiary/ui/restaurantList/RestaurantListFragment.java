@@ -1,6 +1,7 @@
 package com.example.myrestaurantdiary.ui.restaurantList;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,9 +42,6 @@ public class RestaurantListFragment extends Fragment {
         binding = FragmentRestaurantlistBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textRestaurantlist;
-        restaurantListViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         dbHandler = new DBHandler(getContext());
 
         restaurantList = binding.restaurantList;
@@ -74,6 +72,7 @@ public class RestaurantListFragment extends Fragment {
                 bundle.putString("Phone Number", restaurant.getPhoneNumber());
                 bundle.putString("Description", restaurant.getDescription());
                 bundle.putString("Tags", restaurant.getTags());
+                bundle.putFloat("Rating", restaurant.getRating());
 
                 Navigation.findNavController(view)
                         .navigate(R.id.action_nav_restaurantList_to_nav_restaurantFragment, bundle);
@@ -119,15 +118,13 @@ public class RestaurantListFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Restaurant restaurant = updatedList.get(position);
 
-                // Use the getRestaurant method to get the full details of the selected restaurant
-                Restaurant selectedRestaurant = dbHandler.getRestaurant(restaurant.getId());
-
+                Log.d("RestaurantListFragment", "Clicked on restaurant with rating: " + restaurant.getRating());
                 Bundle bundle = new Bundle();
-                bundle.putString("Name", selectedRestaurant.getName());
-                bundle.putString("Address", selectedRestaurant.getAddress());
-                bundle.putString("Phone Number", selectedRestaurant.getPhoneNumber());
-                bundle.putString("Description", selectedRestaurant.getDescription());
-                bundle.putString("Tags", selectedRestaurant.getTags());
+                bundle.putString("Name", restaurant.getName());
+                bundle.putString("Address", restaurant.getAddress());
+                bundle.putString("Phone Number", restaurant.getPhoneNumber());
+                bundle.putString("Description", restaurant.getDescription());
+                bundle.putString("Tags", restaurant.getTags());
                 bundle.putFloat("Rating", restaurant.getRating());
 
                 Navigation.findNavController(view)
@@ -135,6 +132,7 @@ public class RestaurantListFragment extends Fragment {
             }
         });
     }
+
 
     @Override
     public void onDestroyView() {

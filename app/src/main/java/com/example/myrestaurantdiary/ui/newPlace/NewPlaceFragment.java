@@ -66,6 +66,7 @@ public class NewPlaceFragment extends Fragment {
                         && tags.trim().length() > 0 ){
                     Restaurant restaurant = new Restaurant(name, address, phone, desc, tags, rating);
                     dbHandler.addRestaurant(restaurant);
+                    Log.d("NewPlaceFragment", "Added restaurant with rating: " + rating);
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage("New restaurant added successfully")
                             .setPositiveButton("OK", null)
@@ -77,7 +78,7 @@ public class NewPlaceFragment extends Fragment {
                     et_phone.setText("");
                     et_desc.setText("");
                     et_tags.setText("");
-                    ratingBar.setRating(0);
+                    ratingBar.setRating(0.0f);
                 } else{
                     AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                     builder.setMessage("Please fill all the fields")
