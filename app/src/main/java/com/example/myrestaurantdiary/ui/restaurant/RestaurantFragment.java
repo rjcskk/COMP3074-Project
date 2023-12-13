@@ -69,6 +69,21 @@ public class RestaurantFragment extends Fragment {
                     }
                 }
             });
+
+            Button shareButton = root.findViewById(R.id.btn_share);
+            shareButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    String shareBody = "Here is the restaurant information:\n" + String.join("\n", additionalInfoList);
+                    shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Restaurant Information");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, shareBody);
+                    startActivity(Intent.createChooser(shareIntent, "Share via"));
+                }
+            });
+
+
         }
 
         return root;
