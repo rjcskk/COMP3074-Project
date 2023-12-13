@@ -11,4 +11,6 @@
     <string name="menu_restaurantList">RESTAURANT LIST</string>
     <string name="menu_maps">MAPS</string>
     <string name="menu_About">ABOUT</string>
+    <string name="share">Share</string>
+    <string name="direction">Direction</string>
 </resources>

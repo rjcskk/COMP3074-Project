@@ -22,13 +22,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textAlignment="center"/>
 
     <ListView
         android:id="@+id/info"
         android:layout_width="match_parent"
-        android:layout_height="500dp" />
+        android:layout_height="wrap_content" />
     <RatingBar
         android:id="@+id/ratingBar"
         android:layout_width="wrap_content"
@@ -41,14 +41,11 @@
         android:id="@+id/btn_direction"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Direction" />
+        android:text="@string/direction" />
+
     <Button
         android:id="@+id/btn_share"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="Share" />
+        android:text="@string/share" />
 </LinearLayout>

@@ -36,9 +36,6 @@ public class RestaurantFragment extends Fragment {
         binding = FragmentRestaurantBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textRestaurant;
-        restaurantViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-
         Bundle args = getArguments();
         if (args != null) {
             String name = args.getString("Name");
@@ -49,6 +46,7 @@ public class RestaurantFragment extends Fragment {
 
             restaurantAddress = args.getString("Address");
             additionalInfoList = new ArrayList<>();
+            additionalInfoList.add("Name:\n" + name);
             additionalInfoList.add("Address:\n" + restaurantAddress);
             additionalInfoList.add("Phone Number:\n" + args.getString("Phone Number"));
             additionalInfoList.add("Description:\n" + args.getString("Description"));
